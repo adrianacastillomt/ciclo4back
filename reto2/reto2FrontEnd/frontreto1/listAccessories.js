@@ -49,7 +49,7 @@ function poblarTabla(productos) {
                 "<td>" + obj.category + "</td>" +
                 "<td>" + obj.material + "</td>" +
                 "<td>" + obj.description + "</td>" +
-                "<td>" + (obj.avaliability ? 'Si' : 'No') + "</td>" +
+                "<td>" + (obj.availability ? 'Si' : 'No') + "</td>" +
                 "<td>" + obj.price + "</td>" +
                 "<td>" + obj.quantity + "</td>" +
                 "<td>" + obj.photography + "</td>" +
@@ -105,7 +105,7 @@ function cargarAcc(idAcc) {
             $("#acccat").val(data.category);
             $("#accmat").val(data.material);
             $("#accdescr").val(data.description);
-            $("#accav").val(data.avaliability);
+            $("#accav").val(data.availability);
             $("#accprice").val(data.price);
             $("#accstock").val(data.quantity);
             $("#accphoto").val(data.photography);
@@ -156,7 +156,7 @@ function editarAcc() {
         category: $("#acccat").val(),
         material: $("#accmat").val(),
         description: $("#accdescr").val(),
-        avaliability: $("#accav").val(),
+        availability: $("#accav").val(),
         price: $("#accprice").val(),
         quantity: $("#accstock").val(),
         photography: $("#accphoto").val()
@@ -200,7 +200,7 @@ function guardarAcc() {
         category: $("#acccat").val(),
         material: $("#accmat").val(),
         description: $("#accdescr").val(),
-        avaliability: $("#accav").val(),
+        availability: $("#accav").val(),
         price: $("#accprice").val(),
         quantity: $("#accstock").val(),
         photography: $("#accphoto").val()

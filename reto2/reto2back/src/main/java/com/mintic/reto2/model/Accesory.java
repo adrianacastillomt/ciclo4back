@@ -21,7 +21,7 @@ public class Accesory {
 	private String category;
 	private String material;
 	private String description;
-	private boolean avaliability = true;
+	private boolean availability = true;
 	private double price;
 	private int quantity;
 	private String photography;
