@@ -62,7 +62,8 @@ public class AccesoryService {
 				if (accesory.getPhotography() != null) {
 					accesoryDb.get().setPhotography(accesory.getPhotography());
 				}
-
+				accesoryDb.get().setAvailability(accesory.isAvailability());
+				
 				repositorio.update(accesoryDb.get());
 				return accesoryDb.get();
 			} else {
