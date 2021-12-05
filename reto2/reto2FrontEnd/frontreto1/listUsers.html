@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
+    <link rel="stylesheet" href="css/listUsers.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script type="text/JavaScript" language="JavaScript" src="master.js"></script>
+    <script type="text/JavaScript" language="JavaScript" src="listUsers.js"></script>
+    <title>Adm Usuarios</title>
+</head>
+
+<body>
+    <div id="list">
+        <div class="container">
+            <div class="form-group row">
+                <button type="button" class="btn btn-success col-sm-1" data-toggle="modal" data-target="#editUserModal" onclick="agregarUser();">Agregar</button>
+                <h3 class="col-sm-11 justify-content-center">Administraci&oacute;n de Usuarios</h3>
+            </div>
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-box" class="col-md-12">
+                    <table id="tablaUsuarios" class="table table-hover">
+                        <thead class="thead-blue text-center">
+                            <tr>
+                                <th scope="col">Editar</th>
+                                <th scope="col">Eliminar</th>
+                                <th scope="col">Identificaci&oacute;n</th>
+                                <th scope="col">Nombres</th>
+                                <th scope="col">E-mail</th>
+                                <th scope="col">Perfil</th>
+                                <th scope="col">Zona</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Cargando usuarios...</td>
+                            </tr>
+                        </tbody>
+                  </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Editar Usuario</h5>
+                    <h5 class="modal-title" id="addModalLabel">Agregar Usuario</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="userid" class="text-info">Identificaci&oacute;n:</label><br />
+                        <input type="number" name="userid" id="userid" maxlength="11" class="form-control" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="username" class="text-info">Nombres:</label><br />
+                        <input type="username" name="username" id="username" maxlength="80" class="form-control" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="useraddress" class="text-info">Direcci&oacute;n:</label><br />
+                        <input type="text" name="useraddress" id="useraddress" maxlength="80" class="form-control" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="usercel" class="text-info">Celular:</label><br />
+                        <input type="tel" name="usercel" id="usercel" maxlength="13" class="form-control" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="useremail" class="text-info">E-mail:</label><br />
+                        <input type="email" name="useremail" id="useremail" maxlength="50" class="form-control" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="userpass" class="text-info">Clave:</label><br />
+                        <input type="password" name="userpass" id="userpass" maxlength="50" class="form-control" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="usertype" class="text-info">Perfil:</label><br />
+                        <select id="usertype" name="usertype" class="form-control" required>  
+                            <option value="">Seleccionar</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="userzone" class="text-info">Zona:</label><br />
+                        <select id="userzone" name="userzone" class="form-control" required>
+                            <option value="">Seleccionar</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="btn_close" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="btn_editar" onclick="editarUser();">Editar</button>
+                    <button type="button" class="btn btn-primary" id="btn_guardar" onclick="guardarUser();">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Modal -->
+    <div class="modal fade" id="deleteUserModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form>
+                    <div class="modal-header">						
+                        <h4 class="modal-title" id="deleteModalLabel">Eliminar Usuario</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">					
+                        <p>¿Est&aacute; seguro que desea eliminar este registro?</p>
+                        <p class="text-warning"><small>Esta acci&oacute;in no se puede revertir.</small></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="btn_closeDelete" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-danger" onclick="eliminarUser();">Eliminar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
