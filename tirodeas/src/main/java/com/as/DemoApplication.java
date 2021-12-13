@@ -20,31 +20,35 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class DemoApplication implements CommandLineRunner {
 
-    @Autowired
-    private AccessoryCrudRepository crudRepository;
-    @Autowired
-    private UserCrudRepository userCrudRepository;
-    @Autowired
-    private OrderCrudRepository orderCrudRepository;
-    
+	@Autowired
+	private AccessoryCrudRepository crudRepository;
+	@Autowired
+	private UserCrudRepository userCrudRepository;
+	@Autowired
+	private OrderCrudRepository orderCrudRepository;
 
-    public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(DemoApplication.class, args);
+	}
 
-    @Override
-    public void run(String... args) throws Exception {
-        System.out.println("Aqui se ejecutaran la creación de documentos de mongo...");
-        
-        SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        crudRepository.deleteAll();
-//        userCrudRepository.deleteAll();
-        orderCrudRepository.deleteAll();
+	@Override
+	public void run(String... args) throws Exception {
+		System.out.println("Aqui se ejecutaran la creación de documentos de mongo...");
 
-        crudRepository.saveAll(List.of(
-                new Accessory("AP-903", "ACME", "MATERIAL 1", "PRESENTACION 1", "DESCRIPCION DETALLADA.. alta calidad, bajos precios", true, 100000, 10, "https://ae04.alicdn.com/kf/Hfcd876d3b37a4c43bd6eb101ab58ef87X/diy-artesanato-de-couro-curto-carteira-artesanal-acessorios-de-costura-meninos-carteira.jpg"),
-                new Accessory("AP-904", "ACME", "MATERIAL 2","PRESENTACION 2", "DESCRIPCION DETALLADA... relacion beneficio costo, EXCLUSIVIDAD",  true, 130000, 10, "https://www.academiaferoli.com.br/thumbs-1/179429_imgs-Gfohuo-voltar-para-os-antigos-fivela-de-couro-genu%C3%ADno.jpeg")));
+		SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		
+		crudRepository.deleteAll();
+		userCrudRepository.deleteAll();
+		orderCrudRepository.deleteAll();
+
+		// crudRepository.saveAll(List.of(
+		// new Accessory("AP-903", "ACME", "MATERIAL 1", "PRESENTACION 1", "DESCRIPCION
+		// DETALLADA.. alta calidad, bajos precios", true, 100000, 10,
+		// "https://ae04.alicdn.com/kf/Hfcd876d3b37a4c43bd6eb101ab58ef87X/diy-artesanato-de-couro-curto-carteira-artesanal-acessorios-de-costura-meninos-carteira.jpg"),
+		// new Accessory("AP-904", "ACME", "MATERIAL 2","PRESENTACION 2", "DESCRIPCION
+		// DETALLADA... relacion beneficio costo, EXCLUSIVIDAD", true, 130000, 10,
+		// "https://www.academiaferoli.com.br/thumbs-1/179429_imgs-Gfohuo-voltar-para-os-antigos-fivela-de-couro-genu%C3%ADno.jpeg")));
 
 //        userCrudRepository.saveAll(List.of(
 //                new User(1, "123123", "ALAN BRITO", ft.parse("1986-11-15"),"11","CR 34-45", "311222222", "abrito@gmail.com", "Demo123.", "Centro", "ADM"),
@@ -126,5 +130,5 @@ public class DemoApplication implements CommandLineRunner {
 //        //imprime el los datos de las ordenes
 //        orderCrudRepository.saveAll(List.of(orderOne, orderTwo, orderThree));
 //        orderCrudRepository.findAll().forEach(System.out::println);        
-    }
+	}
 }
