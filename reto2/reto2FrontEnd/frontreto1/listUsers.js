@@ -5,6 +5,7 @@ var zonas = [
     'Consota', 'Olimpica', 'Ferrocarril', 'San Joaquin', 'Perla del Otun', 'El Oso', 'San Nicolas', 'El Rocio', 'Del Cafe', 'El Poblado'
 ];
 var types = new Map();
+types.set('ADM','Administrador');
 types.set('ASE','Asesor Comercial');
 types.set('COORD','Coordinador de Zona');
 
@@ -124,6 +125,7 @@ function cargarUser(idUser) {
             $("#useremail").val(data.email);
             $("#userpass").val(data.password);
             $("#usertype").val(data.type);
+            $("#userzone").val(data.zone);
         },
         error: function (xhr, status) {	
             console.log(xhr);

@@ -15,9 +15,8 @@
             <!-- Sidebar-->
             <div class="border-end bg-white" id="sidebar-wrapper">
                 <div class="sidebar-heading border-bottom bg-light">Tiro de As</div>
-                <div class="list-group list-group-flush">
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!" onclick="navegar('listUsers.html');">Administraci&oacute;n Usuarios</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!" onclick="navegar('listAccessories.html');">Inventario de Productos</a>
+                <div id="menuUser" class="list-group list-group-flush">
+                    
                 </div>
             </div>
             <!-- Page content wrapper-->
@@ -43,7 +42,23 @@
                 <!-- Page content-->
                 <div class="container-fluid" id="page-content">
                     <h1 class="mt-4">BIENVENIDO</h1>
-                   
+                    <div id="login-row" class="row justify-content-center align-items-center">
+                        <div id="login-box" class="col-md-12">
+                            <table id="tablaUsuarios" class="table table-hover">
+                                <thead class="thead-blue text-center">
+                                    <tr>
+                                        <th scope="col">Identificaci&oacute;n</th>
+                                        <th scope="col">Nombres</th>
+                                        <th scope="col">E-mail</th>
+                                        <th scope="col">Perfil</th>
+                                        <th scope="col">Zona</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                          </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

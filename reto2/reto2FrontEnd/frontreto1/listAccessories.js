@@ -52,7 +52,7 @@ function poblarTabla(productos) {
                 "<td>" + (obj.availability ? 'Si' : 'No') + "</td>" +
                 "<td>" + obj.price + "</td>" +
                 "<td>" + obj.quantity + "</td>" +
-                "<td>" + obj.photography + "</td>" +
+                "<td><img src='" + obj.photography+ "' class='img-fluid img-thumbnail'></td>" +
             "</tr>"
         );
     
