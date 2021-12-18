@@ -4,11 +4,20 @@ var orderDb = {};
 $(document).ready(function () {
     $.support.cors = true;
 
-    idOrder =sessionStorage.getItem('idOrder');
+    idOrder = sessionStorage.getItem('idOrder');
 
     console.log('>>>> idOrder ' + idOrder);
 
     cargarOrder();
+
+    var usuario = getUser();
+
+    if (usuario.type === 'ASE') {
+        $('#status-row').hide();
+    } else {
+        $('#status-row').show();
+    }
+
 });
 
 function cargarOrder() {

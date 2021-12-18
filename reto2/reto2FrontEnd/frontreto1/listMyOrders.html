@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
+    <link rel="stylesheet" href="css/listUsers.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script type="text/JavaScript" language="JavaScript" src="listMyOrders.js"></script>
+    <script type="text/JavaScript" language="JavaScript" src="master.js"></script>
+    <title>Orden de Pedido</title>
+</head>
+
+<body>
+    <div id="list">
+        <div class="container">
+            <div class="form-group row">
+                <h3 class="col-sm-10 justify-content-center">Mis Ordenes de Pedido</h3>
+            </div>
+            <div class="form-group row">
+                <label for="orderStatus" class="text-info col-sm-2">Filtrar por Estado:</label>
+                <select id="orderStatus" name="orderStatus" class="form-control col-sm-2" onchange="filtrarPor('status')">  
+                    <option value="">Seleccionar</option>
+                    <option value="Pendiente">Pendiente</option>
+                    <option value="Aprobado">Aprobado</option>
+                    <option value="Rechazado">Rechazado</option>
+                </select>
+            </div>
+            <div class="form-group row">
+                <label for="orderDate" class="text-info col-sm-2">Filtrar por Fecha Pedido:</label>
+                <input type="date" id="orderDate" name="orderDate" class="form-control col-sm-2" onchange="filtrarPor('date')">
+                <button type="button" class="btn btn-success col-sm-2 justify-content-right" onclick="filtrarOrdenes();">Buscar</button>
+            </div>
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-box" class="col-md-12">
+                    <table id="tablaOrders" class="table table-hover">
+                        <thead class="thead-blue text-center">
+                            <tr>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">No. Pedido</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col">Pedido</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Cargando Mis Ordenes...</td>
+                            </tr>
+                        </tbody>
+                  </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
