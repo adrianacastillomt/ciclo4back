@@ -1,15 +1,74 @@
 var id = 0;
 var refDb = '';
+var usuario;
 
 $(document).ready(function () {
     $.support.cors = true;
 
     cargarProductos();
+    usuario = getUser();
+
+    switch(usuario.type) {
+        case "ADM":
+            $('#accDescrFilterDiv').hide();
+            $('#accPriceFilterDiv').hide();
+            break;
+        case "ASE":
+            $('#agregarAccBtn').hide();
+            break;
+        case "COORD":
+            $('#agregarAccBtn').hide();
+            $('#accDescrFilterDiv').hide();
+            $('#accPriceFilterDiv').hide();
+            break;
+    }
 });
 
 function cargarProductos() {
     $.ajax({
         url: "http://localhost:80/api/accessory/all",
+        type: 'GET',
+        contentType: "application/JSON; charset=utf-8",
+        dataType: "json",
+        
+        success: function (productos) {
+            console.log(productos);	
+            poblarTabla(productos);
+        },
+ 
+        error: function (xhr, status) {	
+            console.log(xhr);
+        },
+        complete: function (xhr, status) {
+            console.log("Todo bien"  + status);
+        }
+    });
+}
+
+function filtrarAcc(filter) {
+    let urlFiltro = "";
+
+    switch (filter) {
+        case "descr": 
+            if ($('#accDescrFilter').val())
+                urlFiltro = "description/" + $('#accDescrFilter').val()
+            else
+                urlFiltro = "all"
+
+            break;
+        case "price": 
+            if ($('#accPriceFilter').val())
+                urlFiltro = "price/" + $('#accPriceFilter').val()
+            else
+                urlFiltro = "all"
+            
+            break;
+        default:
+            urlFiltro = "all"
+    }
+
+    $.ajax({
+        url: "http://localhost:80/api/accessory/" + urlFiltro,
         type: 'GET',
         contentType: "application/JSON; charset=utf-8",
         dataType: "json",
@@ -36,24 +95,31 @@ function poblarTabla(productos) {
     }
 
     $.each(productos, function (index, obj) {
+        let html = `<tr>
+        <td>${obj.reference}</td>
+        <td>${obj.brand}</td>
+        <td>${obj.category}</td>
+        <td>${obj.material}</td>
+        <td>${obj.description}</td>
+        <td>${(obj.availability ? 'Si' : 'No')}</td>
+        <td>${obj.price}</td>" +
+        <td>${obj.quantity}</td>" +
+        <td><img src='${obj.photography}' class='img-fluid img-thumbnail'></td>`;
+
+        if (usuario.type === 'ADM') {
+            html += 
+            `<td>   
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editAccModal" onclick="cargarAcc('${obj.reference}');">Editar</button>
+            </td>
+            <td>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteAccModal" onclick="borrarAcc('${obj.reference}');">Eliminar</button>
+            </td>`;
+        }
+        
+        html += `</tr>`;
+
         $("#tablaAcc tbody").append(
-            "<tr>" +
-				"<td>"+
-'<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editAccModal" onclick="cargarAcc(\''+ obj.reference + '\');">Editar</button>'+
-"</td>"+
-"<td>"+
-'<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteAccModal" onclick="borrarAcc(\''+ obj.reference + '\');">Eliminar</button>'+
-"</td>"+
-                "<td>" + obj.reference + "</td>" +
-                "<td>" + obj.brand+ "</td>" +
-                "<td>" + obj.category + "</td>" +
-                "<td>" + obj.material + "</td>" +
-                "<td>" + obj.description + "</td>" +
-                "<td>" + (obj.availability ? 'Si' : 'No') + "</td>" +
-                "<td>" + obj.price + "</td>" +
-                "<td>" + obj.quantity + "</td>" +
-                "<td><img src='" + obj.photography+ "' class='img-fluid img-thumbnail'></td>" +
-            "</tr>"
+            html
         );
     
     });

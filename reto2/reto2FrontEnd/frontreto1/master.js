@@ -44,13 +44,16 @@ function cargarMenu() {
         case "ASE":
             menu.append(`
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!" onclick="navegar('createOrders.html');">Orden de Pedido</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!" onclick="navegar('listMyOrders.html');">Mis Ordenes de Pedido</a>`
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!" onclick="navegar('listMyOrders.html');">Mis Ordenes de Pedido</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!" onclick="navegar('listAccessories.html');">Inventario de Productos</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!" onclick="navegar('listUsers.html');">Usuarios</a>`
             );
             break;
         case "COORD":
             menu.append(`
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!" onclick="navegar('createOrders.html');">Orden de Pedido</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!" onclick="navegar('listOrders.html');">Listado de Pedidos</a>`
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!" onclick="navegar('listOrders.html');">Listado de Pedidos</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!" onclick="navegar('listUsers.html');">Usuarios</a>`
             );
             break;
         default:

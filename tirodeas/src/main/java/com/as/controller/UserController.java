@@ -17,10 +17,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-/**
- *
- * @author desarrolloextremo
- */
+
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/api/user")

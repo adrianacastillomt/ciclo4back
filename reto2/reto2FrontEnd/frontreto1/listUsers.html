@@ -19,21 +19,40 @@
     <div id="list">
         <div class="container">
             <div class="form-group row">
-                <button type="button" class="btn btn-success col-sm-1" data-toggle="modal" data-target="#editUserModal" onclick="agregarUser();">Agregar</button>
+                <button id="agregarUserBtn" type="button" class="btn btn-success col-sm-1" data-toggle="modal" data-target="#editUserModal" onclick="agregarUser();">Agregar</button>
                 <h3 class="col-sm-11 justify-content-center">Administraci&oacute;n de Usuarios</h3>
+            </div>
+            <div id="userFilterDiv" class="form-group row">
+                <label for="userMonthFilter" class="text-info col-sm-2">Filtrar por Cumplea&ntilde;os del Mes:</label>
+                <select class="form-select col-sm-4" id="userMonthFilter">
+                    <option value="" selected="selected">Seleccionar</option>
+                    <option value="01">ENERO</option>
+                    <option value="02">FEBRERO</option>
+                    <option value="03">MARZO</option>
+                    <option value="04">ABRIL</option>
+                    <option value="05">MAYO</option>
+                    <option value="06">JUNIO</option>
+                    <option value="07">JULIO</option>
+                    <option value="08">AGOSTO</option>
+                    <option value="09">SEPTIEMBRE</option>
+                    <option value="10">OCTUBRE</option>
+                    <option value="11">NOVIEMBRE</option>
+                    <option value="12">DICIEMBRE</option>
+                </select>
+                <button type="button" class="btn btn-success col-sm-2 justify-content-right" onclick="cargarUsuarios();">Buscar</button>
             </div>
             <div id="login-row" class="row justify-content-center align-items-center">
                 <div id="login-box" class="col-md-12">
                     <table id="tablaUsuarios" class="table table-hover">
                         <thead class="thead-blue text-center">
                             <tr>
-                                <th scope="col">Editar</th>
-                                <th scope="col">Eliminar</th>
                                 <th scope="col">Identificaci&oacute;n</th>
                                 <th scope="col">Nombres</th>
                                 <th scope="col">E-mail</th>
                                 <th scope="col">Perfil</th>
                                 <th scope="col">Zona</th>
+                                <th scope="col">Editar</th>
+                                <th scope="col">Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -64,6 +83,10 @@
                     <div class="form-group">
                         <label for="username" class="text-info">Nombres:</label><br />
                         <input type="username" name="username" id="username" maxlength="80" class="form-control" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="userbirthtDay" class="text-info">Fecha de Cumplea&ntilde;os:</label><br />
+                        <input type="date" name="userbirthtDay" id="userbirthtDay" maxlength="50" class="form-control" required/>
                     </div>
                     <div class="form-group">
                         <label for="useraddress" class="text-info">Direcci&oacute;n:</label><br />

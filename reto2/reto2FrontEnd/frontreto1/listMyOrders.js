@@ -30,7 +30,7 @@ function cargarOrdenes() {
 }
 
 function filtrarPor(filtro) {
-    switch (filter) {
+    switch (filtro) {
         case "status":
             $('#orderDate').val("");
             break;

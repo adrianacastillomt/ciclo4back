@@ -9,12 +9,30 @@ types.set('ADM','Administrador');
 types.set('ASE','Asesor Comercial');
 types.set('COORD','Coordinador de Zona');
 
+var usuario;
+
 $(document).ready(function () {
     $.support.cors = true;
 
     cargarUsuarios();
     cargarZonas();
     cargarTypes();
+
+    usuario = getUser();
+
+    switch(usuario.type) {
+        case "ADM":
+            $('#userFilterDiv').hide();
+            break;
+        case "ASE":
+            $('#agregarUserBtn').hide();
+            $('h3').html('Usuarios');
+            break;
+        case "COORD":
+            $('#agregarUserBtn').hide();
+            $('h3').html('Usuarios');
+            break;
+    }
 });
 
 
@@ -28,13 +46,18 @@ function cargarTypes() {
     for (let [key, value] of types.entries()) {
         $("#usertype").append('<option value="'+key+'">'+value+'</option>');
     }
-
 }
 
 function cargarUsuarios() {
+    let endpoint = "all";
+    let monthBirthDay = $('#userMonthFilter').val();
+    
+    if (monthBirthDay)
+        endpoint = "birthday/" + monthBirthDay;
+        
     $.ajax({
         //url del servicio
-        url: "http://localhost:80/api/user/all",
+        url: "http://localhost:80/api/user/" + endpoint,
         type: 'GET',
         contentType: "application/JSON; charset=utf-8",
         dataType: "json",
@@ -54,30 +77,38 @@ function cargarUsuarios() {
     });
 }
 
+function filtrarUser() {
+
+}
+
 function poblarTabla(usuarios) {
     if ($("#tablaUsuarios tbody").length == 0) {
-            $("#tablaUsuarios").append("<tbody></tbody>");
+        $("#tablaUsuarios").append("<tbody></tbody>");
     } else {
         $("#tablaUsuarios tbody").empty();
     }
 
     $.each(usuarios, function (index, obj) {
-        $("#tablaUsuarios tbody").append(
-            "<tr>" +
-				  "<td>"+
-"<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#editUserModal' onclick='cargarUser("+ obj.id + ");'>Editar</button>"+
-"</td>"+
-"<td>"+
-    "<button type='button' class='btn btn-danger' data-toggle='modal' data-target='#deleteUserModal' onclick='borrarUser("+ obj.id + ");'>Eliminar</button>"+
-"</td>"+
-                "<td>" + obj.identification+ "</td>" +
-                "<td>" + obj.name + "</td>" +
-                "<td>" + obj.email + "</td>" +
-                "<td>" + types.get(obj.type) + "</td>" +
-                "<td>" + obj.zone + "</td>" +
-            "</tr>"
-        );
-    
+        let html = `<tr>
+            <td>${obj.identification}</td>
+            <td>${obj.name}</td>
+            <td>${obj.email}</td>
+            <td>${types.get(obj.type)}</td>
+            <td>${obj.zone}</td>`;
+
+        if (usuario.type === 'ADM') {
+            html += 
+                `<td>   
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editUserModal" onclick="cargarUser('${obj.id}');">Editar</button>
+                </td>
+                <td>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteUserModal" onclick="borrarUser('${obj.id}');">Eliminar</button>
+                </td>`;
+        }
+        
+        html += `</tr>`;
+
+        $("#tablaUsuarios tbody").append(html);
     });
 }
 
@@ -118,8 +149,12 @@ function cargarUser(idUser) {
         success: function(data) {
             emailDb = data.email;
 
+            let birthtDay = data.birthtDay;
+            birthtDay = birthtDay.substring(0, birthtDay.indexOf("T", birthtDay));
+
             $("#userid").val(data.identification);
             $("#username").val(data.name);
+            $("#userbirthtDay").val(birthtDay);
             $("#useraddress").val(data.address);
             $("#usercel").val(data.cellPhone);
             $("#useremail").val(data.email);
@@ -172,10 +207,16 @@ function editarUser() {
         return;
     }
 
+    let birthday= $("#userbirthtDay").val();
+    let position = birthday.indexOf("-");
+    let monthBirthDay = birthday.substring(position+1,position+3);
+
     let datos = {
         id: id,
         identification: $("#userid").val(),
         name: $("#username").val(),
+        birthtDay: birthday,
+        monthBirthtDay: monthBirthDay,
         address: $("#useraddress").val(),
         cellPhone: $("#usercel").val(),
         email: $("#useremail").val(),
@@ -185,6 +226,7 @@ function editarUser() {
     }
 
     let datosPeticion = JSON.stringify(datos);
+    console.log(datosPeticion);
 
     $.ajax({
         url: "http://localhost:80/api/user/update",
@@ -216,10 +258,15 @@ function guardarUser() {
         return;
     }
 
+    let birthday= $("#userbirthtDay").val();
+    let position = birthday.indexOf("-");
+    let monthBirthDay = birthday.substring(position+1,position+3);
+
     let datos = {
-        id: Math.floor((Math.random() * 10000) + 1),
         identification: $("#userid").val(),
         name: $("#username").val(),
+        birthtDay: birthday,
+        monthBirthtDay: monthBirthDay,
         address: $("#useraddress").val(),
         cellPhone: $("#usercel").val(),
         email: $("#useremail").val(),
